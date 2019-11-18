@@ -172,9 +172,12 @@ past build_program(){
 
 past build_external_decl(){
 	past node = build_type();
-	if (node) node = new_node(token_external_decl, "", node,
+	if (node) {
+		node = new_node(token_external_decl, "", node,
 								new_node(token_Compound_list, "", build_declarator(),
-										build_decl_or_stat()));
+												NULL));
+		node->right->right = build_decl_or_stat();
+	}
 	return node;
 }
 
